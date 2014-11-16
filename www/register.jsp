@@ -7,7 +7,7 @@
     String stud="",fac="",studfrm="style='display: none;'",facfrm="style='display: none;'";
     if(request.getParameter("role")!=null && request.getParameter("role").equals("1")) {stud="checked='checked'";fac="";studfrm="";}
        else if(request.getParameter("role")!=null && request.getParameter("role").equals("2")) {stud="";fac="checked='checked'";facfrm="";}
-    
+    /*
     Department dept = new Department();
     ArrayList<Department> al = dept.find("select * from department order by name");
     Iterator<Department> itr = al.iterator();
@@ -17,7 +17,7 @@
         dept = itr.next();
         deptlist+=("<option value='"+dept.getDeptID() +"'>"+dept.getName()+"</option>");
     }
-    deptlist+="</select>";
+    deptlist+="</select>";*/
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
@@ -95,7 +95,7 @@ function load_subcat()
           </p>
           <p>
             <label for="Email"><small>Email</small></label><br />
-            <input type="email" name="email" id="email" size="50"/>
+            <input type="text" name="email" id="email" size="50"/>
           </p>
           <p>
             <label for="password"><small>New Password</small></label><br />
@@ -168,11 +168,11 @@ function load_subcat()
           </p>
           <p>
             <label for="dept"><small>Department</small></label><br />
-            <%=deptlist%>
+            <%//*deptlist*/%>
           </p>          
           <p>
-            <label for="desg"><small>Subjects</small></label><br />
-            <div id="subjects">First select a Department</div>
+            <label for="desg"><small>Subjects</small></label>
+            <span id="subjects">First select a Department</span>
           </p>
           <p><br />
             <input name="submit" type="submit" id="submit" value="Add" />

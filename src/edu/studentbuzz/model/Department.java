@@ -1,5 +1,4 @@
 package edu.studentbuzz.model;
-
 import edu.studentbuzz.helper.dbConnection;
 
 import java.sql.ResultSet;

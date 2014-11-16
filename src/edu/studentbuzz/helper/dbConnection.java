@@ -35,7 +35,7 @@ public class dbConnection {
 		try {
 			Statement stmt = con.createStatement();
 			return stmt.executeUpdate(SQL);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 		return 0;

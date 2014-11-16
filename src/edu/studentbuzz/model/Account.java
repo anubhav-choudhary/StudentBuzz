@@ -60,8 +60,9 @@ public class Account  {
     public void findById() {
        dbConnection data = new dbConnection();
        data.open();
+       try{
         ResultSet rs =data.executeQuery("Select * from account where Email_ID='"+emailID+"'");
-        try{
+        
             if(rs.next())
             {
             emailID=rs.getString(1);
