@@ -131,6 +131,7 @@ function load_subcat()
     </div>
     <div id="faculty" <%=facfrm%>>
     <br />
+    <!-- 
     <h1>Faculty Registration Form</h1>
     <%
         if(request.getParameter("msg")!=null) {out.println(new MsgDecoder(Integer.parseInt(request.getParameter("msg"))).getHTML());}
@@ -182,7 +183,7 @@ function load_subcat()
           
         </form>
         </div>
-    
+     -->
     </div>
     <!-- ####################################################################################################### -->
   </div>
