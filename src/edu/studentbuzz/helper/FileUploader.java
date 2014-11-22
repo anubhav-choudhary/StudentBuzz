@@ -17,6 +17,7 @@ public class FileUploader {
 	private ArrayList < String > original_name;
 	private ArrayList < Long > size;
 	private ArrayList < String > file_type;
+	
 	public ArrayList < String > getAllowed_filetype() {
 		return allowed_filetype;
 	}
@@ -73,18 +74,19 @@ public class FileUploader {
 				fieldname = fieldlist.next();
 				if (request.getPart(fieldname).getSize() <= sizelimit) {
 					if (match(request.getPart(fieldname).getContentType())) {
-						String tname = genNewName(request.getPart(fieldname).toString());
-						cpy.copyFile(request.getPart(fieldname).getInputStream(), new File(request.getSession().getServletContext().getRealPath("/").replace('\\', '/') + upload_dir + "/" + tname));
+						String tname = genNewName(request.getPart(fieldname).getHeader("content-disposition"));
+						cpy.copyFile(request.getPart(fieldname).getInputStream(), new File(request.getSession().getServletContext().getRealPath("/").replace('\\', '/') + "/"+upload_dir + "/" + tname));
 
 						assigined_name.add(tname);
-						original_name.add(getFname(request.getPart(fieldname).toString()));
+						original_name.add(getFname(request.getPart(fieldname).getHeader("content-disposition")));
 						file_type.add(request.getPart(fieldname).getContentType());
 						size.add(request.getPart(fieldname).getSize());
 					}
 
 				}
 			} catch (Exception e) {
-				System.out.println(e.toString());
+				//System.out.println(e.toString());
+				e.printStackTrace();
 			}
 
 		}
@@ -116,8 +118,7 @@ public class FileUploader {
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-
-		File file = new File(request.getSession().getServletContext().getRealPath("/").replace('\\', '/') + upload_dir + "\\" + sb.toString() + ext);
+		File file = new File(request.getSession().getServletContext().getRealPath("/").replace('\\', '/') + "/" + upload_dir + "\\" + sb.toString() + ext);
 
 		if (file.exists()) return genNewName(data);
 		return sb.toString() + ext;
@@ -125,7 +126,7 @@ public class FileUploader {
 
 	static private String getFname(String data) {
 		String result;
-		result = data.substring(data.indexOf("name=", 0) + 5, data.indexOf(",", data.indexOf("name=", 0)));
+		result = data.substring(data.indexOf("filename=",0)+10, data.indexOf("\"", data.indexOf("filename=",0)+10));
 		return result;
 	}
 
